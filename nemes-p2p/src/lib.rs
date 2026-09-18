@@ -117,7 +117,8 @@ impl P2PNode {
             "/nemes/1.0.0".to_string(),
             keypair.public(),
         ));
-        // Kademlia DHT (B18 WAN kesif): mDNS'in goremedigi esler icin.
+        // Kademlia DHT iskeleti: bugun yalnizca tohum-adresli calisir (add_address+bootstrap);
+        // provide/get_providers/dial yok — tohum-disi WAN kesfi fiilen mDNS+elle dial'dir.
         let mut kad_cfg = kad::Config::default();
         kad_cfg.set_protocol_names(vec![libp2p::StreamProtocol::new("/nemes/kad/1.0.0")]);
         let kademlia = kad::Behaviour::with_config(
@@ -226,7 +227,10 @@ impl P2PNode {
                             if self.mdns_acik {
                                 for (peer, addr) in list {
                                     debug!("mdns discovered {} {}", peer, addr);
-                                    self.swarm.dial(addr.clone())?;
+                                    // Bozuk tek adres tum swarm dongusunu devirmesin (B12):
+                                    if let Err(e) = self.swarm.dial(addr.clone()) {
+                                        debug!("mdns dial basarisiz {} {}: {}", peer, addr, e);
+                                    }
                                 }
                             }
                         }

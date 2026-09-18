@@ -6,7 +6,6 @@ use anyhow::Result;
 
 /// Generate a new Ed25519 keypair
 pub fn generate_keypair() -> (ed25519_dalek::SigningKey, ed25519_dalek::VerifyingKey) {
-    let mut csprng = rand::rngs::OsRng;
     let signing_key = ed25519_dalek::SigningKey::generate(&mut rand::rngs::OsRng);
     let verifying_key = signing_key.verifying_key();
     (signing_key, verifying_key)

@@ -1,6 +1,6 @@
 use clap::{Parser, Subcommand};
 use anyhow::Result;
-use nemes_core::protocol::{verify_signed_command, SignedCommand};
+use nemes_core::protocol::{verify_signed_command_taze, SignedCommand};
 
 #[derive(Parser)]
 #[command(name = "nemes-miner", version = "0.1.0", about = "NEMES CLI - Mine knowledge. Not hashes. (VPS-less P2P)")]
@@ -17,7 +17,7 @@ enum Commands {
     Node {
         #[arg(long, default_value = "4001")]
         port: u16,
-        /// Master public key (hex, 32 byte). Verilmezse binary'e gomulu MASTER_PUBKEY_HEX kullanilir.
+        /// Master public key (hex 64 hane veya base64). Verilmezse gomulu MASTER_PUBKEY_B64 kullanilir.
         #[arg(long)]
         master_pubkey: Option<String>,
     },
@@ -93,9 +93,15 @@ async fn main() -> Result<()> {
                             if topic == "nemes/komut" {
                                 match serde_json::from_slice::<SignedCommand>(&data) {
                                     Ok(cmd) => {
-                                        let ok = verify_signed_command(&cmd, &master);
+                                        let simdi = std::time::SystemTime::now()
+                                            .duration_since(std::time::UNIX_EPOCH)
+                                            .map(|d| d.as_secs())
+                                            .unwrap_or(0);
+                                        let ok = verify_signed_command_taze(&cmd, &master, simdi);
                                         if ok {
                                             println!("KOMUT KABUL from={} epoch={} payload={}", from, cmd.epoch, cmd.payload_json);
+                                        } else if cmd.expires < simdi || cmd.epoch > simdi + 300 {
+                                            println!("KOMUT RED from={} (suresi dolmus/gelecek-damga: replay?)", from);
                                         } else {
                                             println!("KOMUT RED from={} (imza yok/hatali)", from);
                                         }

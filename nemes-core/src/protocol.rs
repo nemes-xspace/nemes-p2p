@@ -35,6 +35,24 @@ pub fn verify_signed_command(cmd: &SignedCommand, expected_pubkey_b64: &str) -> 
     vk.verify_strict(&msg, &sig).is_ok()
 }
 
+/// Tazelik korumali dogrulama: imza + sure-penceresi.
+/// Gossip tekrar (replay) saldirisini keser: suresi dolmus ya da
+/// cok ileriden damgali komut, imzasi gecerli olsa bile RED yer.
+/// `now_secs` = unix saniye (komuta `current_epoch()` ile ayni saat).
+pub fn verify_signed_command_taze(
+    cmd: &SignedCommand,
+    expected_pubkey_b64: &str,
+    now_secs: u64,
+) -> bool {
+    if cmd.expires < now_secs {
+        return false; // suresi dolmus (replay)
+    }
+    if cmd.epoch > now_secs.saturating_add(300) {
+        return false; // 5dk'dan ileride (gelecek-damga)
+    }
+    verify_signed_command(cmd, expected_pubkey_b64)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

@@ -14,6 +14,7 @@ impl ConsensusEngine {
     }
 
     pub async fn validate_block(&self, _block: &ConsensusBlock) -> anyhow::Result<bool> {
-        Ok(true)
+        // fail-closed: cagiran yok (olu kod); biri cagirirsa sahte guvence yerine patlar.
+        anyhow::bail!("consensus validate not implemented in minimal build")
     }
 }

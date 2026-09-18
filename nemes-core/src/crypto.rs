@@ -1,8 +1,7 @@
 //! Crypto primitives for NEMES
 
-use ed25519_dalek::{SigningKey, VerifyingKey, Signature, Signer, Verifier};
+use ed25519_dalek::{Signer, Verifier};
 use blake3;
-use anyhow::Result;
 
 /// Generate a new Ed25519 keypair
 pub fn generate_keypair() -> (ed25519_dalek::SigningKey, ed25519_dalek::VerifyingKey) {

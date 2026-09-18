@@ -1,0 +1,24 @@
+# cargo-audit istisnalari — 18 Eyl 2026 (Tur-4).
+# Kural: her ignore = erisilemezlik gerekcesi + kaldirma gorevi. Gerekcesiz ignore YASAK.
+[advisories]
+ignore = [
+    # RUSTSEC-2023-0071 rsa Marvin: yalnizca sqlx-mysql runtime'inda; komuta
+    # sqlite-only calisir (mysql/postgres baglantisi yok). Kaldirma: B36 (sqlx 0.8).
+    "RUSTSEC-2023-0071",
+    # RUSTSEC-2024-0363 sqlx binary-protokol: mysql/postgres wire cast'i;
+    # sqlite yolu etkilenmez. Kaldirma: B36 (sqlx 0.8).
+    "RUSTSEC-2024-0363",
+    # RUSTSEC-2025-0009 ring AES panic: yalnizca overflow-checks acikken;
+    # release profilinde kapali. Kaldirma: B35 (libp2p yukseltme).
+    "RUSTSEC-2025-0009",
+    # RUSTSEC-2026-0258 h2 DATA cerceve: igd-next UPnP (gateway-yerel) yolu;
+    # WAN'dan erisilemez. Kaldirma: B35.
+    "RUSTSEC-2026-0258",
+    # RUSTSEC-2026-0119 hickory O(n^2): mdns kodlama yolu. Kaldirma: B35.
+    "RUSTSEC-2026-0119",
+    # RUSTSEC-2026-0098/0099/0104 webpki: libp2p-tls ham-anahtar kullanir
+    # (CA/CRL/wildcard dogrulama yolu yok). Kaldirma: B35.
+    "RUSTSEC-2026-0098",
+    "RUSTSEC-2026-0099",
+    "RUSTSEC-2026-0104",
+]

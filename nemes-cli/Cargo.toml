@@ -1,13 +1,13 @@
 [package]
 name = "nemes-cli"
-
-[[bin]]
-name = "nemes-miner"
-path = "src/main.rs"
 version = "0.1.0"
 edition = "2021"
 description = "NEMES CLI - Command line interface"
 license-file = "../../LICENSE"
+
+[[bin]]
+name = "nemes-miner"
+path = "src/main.rs"
 
 [dependencies]
 nemes-core = { path = "../nemes-core" }

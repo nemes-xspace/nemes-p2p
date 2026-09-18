@@ -67,7 +67,7 @@ async fn main() -> Result<()> {
         }
         Commands::Node { port, master_pubkey } => {
             use nemes_p2p::{NetworkEvent, P2PConfig, P2PNode};
-            let mut node = P2PNode::new(P2PConfig { port, enable_mdns: true }).await?;
+            let mut node = P2PNode::new(P2PConfig { port, enable_mdns: true, ..Default::default() }).await?;
             let rx = node.take_event_receiver().expect("event receiver");
             // node.run() sonsuz dongu; event'leri ayri gorevde dinle
             // Verilmezse gomulu anahtar; verilirse hex veya base64 kabul edilir.
@@ -152,7 +152,7 @@ Commands::KomutGonder { hedef, komut_json, wait } => {
             use nemes_p2p::{P2PConfig, P2PNode};
             let data = std::fs::read(&komut_json)?;
             let cmd: SignedCommand = serde_json::from_slice(&data)?;
-            let mut node = P2PNode::new(P2PConfig { port: 0, enable_mdns: true }).await?;
+            let mut node = P2PNode::new(P2PConfig { port: 0, enable_mdns: true, ..Default::default() }).await?;
             let addr: libp2p::Multiaddr = hedef.parse()?;
             node.dial(addr)?;
             // Once baglanti icin swarm calistir

@@ -3,7 +3,7 @@ name = "nemes-p2p"
 version = "0.1.0"
 edition = "2021"
 description = "NEMES P2P Networking - libp2p based"
-license = "Apache-2.0"
+license-file = "../../LICENSE"
 
 [dependencies]
 nemes-core = { path = "../nemes-core" }

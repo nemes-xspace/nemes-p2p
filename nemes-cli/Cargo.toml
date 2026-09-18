@@ -7,7 +7,7 @@ path = "src/main.rs"
 version = "0.1.0"
 edition = "2021"
 description = "NEMES CLI - Command line interface"
-license = "Apache-2.0"
+license-file = "../../LICENSE"
 
 [dependencies]
 nemes-core = { path = "../nemes-core" }

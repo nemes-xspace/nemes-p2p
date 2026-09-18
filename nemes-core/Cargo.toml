@@ -3,7 +3,7 @@ name = "nemes-core"
 version = "0.1.0"
 edition = "2021"
 description = "NEMES Core - Shared types, crypto, and serialization"
-license = "Apache-2.0"
+license-file = "../../LICENSE"
 
 [dependencies]
 tokio = { workspace = true }

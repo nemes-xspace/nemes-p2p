@@ -1,0 +1,16 @@
+[package]
+name = "nemes-wallet"
+version = "0.1.0"
+edition = "2021"
+description = "NEMES Wallet - Ed25519 + BLAKE3 + BIP39"
+license = "Apache-2.0"
+
+[dependencies]
+nemes-core = { path = "../nemes-core" }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+rand = "0.8"
+bip39 = "2.0"

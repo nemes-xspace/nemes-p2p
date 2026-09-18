@@ -1,0 +1,662 @@
+syntax = "proto3";
+
+package nemes;
+
+option rust_client = true;
+option rust_server = true;
+
+message PeerId {
+  bytes key = 1;
+}
+
+message ContentId {
+  bytes hash = 1;
+}
+
+message PeerInfo {
+  bytes peer_id = 1;
+  repeated string addresses = 2;
+  repeated Capability capabilities = 3;
+  uint32 reputation = 4;
+  string version = 6;
+  uint64 last_seen = 7;
+  string protocol_version = 8;
+}
+
+enum Capability {
+  EMBEDDING = 0;
+  STORAGE = 1;
+  COMPUTE = 2;
+  VALIDATION = 3;
+  ROUTING = 4;
+  GATEWAY = 5;
+}
+
+message PeerInfo {
+  bytes peer_id = 1;
+  repeated string addresses = 2;
+  repeated Capability capabilities = 3;
+  uint32 reputation = 4;
+  string version = 6;
+  uint64 last_seen = 7;
+  string protocol_version = 8;
+}
+
+message PeerQuery {
+  repeated Capability capabilities = 1;
+  uint32 min_reputation = 2;
+  uint32 max_distance = 3;
+  uint32 max_results = 4;
+}
+
+message FindPeers {
+  PeerQuery query = 1;
+}
+
+message PeersResponse {
+  repeated PeerInfo peers = 1;
+}
+
+message ContentId {
+  bytes hash = 1;
+}
+
+message ShardId {
+  uint64 id = 1;
+}
+
+message ShardMetadata {
+  uint64 shard_id = 1;
+  string corpus = 2;
+  uint64 size_bytes = 3;
+  uint64 document_count = 3;
+  uint32 vector_dim = 4;
+  string model = 5;
+  uint64 created_at = 6;
+  uint64 updated_at = 7;
+}
+
+message FindContent {
+  bytes cid = 1;
+}
+
+message ContentOffer {
+  bytes cid = 1;
+  bytes provider = 2;
+}
+
+message ContentRequest {
+  bytes cid = 1;
+  uint64 offset = 2;
+  uint32 length = 3;
+}
+
+message ContentResponse {
+  bytes cid = 1;
+  bytes data = 2;
+}
+
+message ShardAnnounce {
+  uint64 shard_id = 1;
+  bytes provider = 2;
+  ShardMetadata metadata = 3;
+}
+
+message ShardRequest {
+  uint64 shard_id = 1;
+  uint64 offset = 2;
+  uint32 length = 3;
+}
+
+message ShardData {
+  uint64 shard_id = 1;
+  bytes data = 2;
+}
+
+message VectorRecord {
+  bytes id = 1;
+  repeated float vector = 2;
+  ChunkMetadata metadata = 3;
+}
+
+message ChunkMetadata {
+  string source = 1;
+  string language = 2;
+  uint64 timestamp = 3;
+  repeated string tags = 4;
+  map<string, string> custom = 5;
+}
+
+message EmbeddingSync {
+  string model = 1;
+  repeated VectorRecord vectors = 2;
+}
+
+message EmbeddingRequest {
+  string model = 1;
+  repeated bytes cids = 2;
+}
+
+message EmbeddingResponse {
+  repeated VectorRecord records = 2;
+}
+
+message ShardMetadata {
+  uint64 shard_id = 1;
+  string corpus = 2;
+  uint64 size_bytes = 3;
+  uint64 document_count = 4;
+  uint32 vector_dim = 4;
+  string model = 5;
+  uint64 created_at = 6;
+  uint64 updated_at = 7;
+}
+
+message ShardRequest {
+  uint64 shard_id = 1;
+  uint64 offset = 2;
+  uint32 length = 3;
+}
+
+message ShardData {
+  uint64 shard_id = 1;
+  bytes data = 2;
+}
+
+message EmbeddingSync {
+  string model = 1;
+  repeated VectorRecord vectors = 2;
+}
+
+message EmbeddingRequest {
+  string model = 1;
+  repeated bytes cids = 2;
+}
+
+message EmbeddingResponse {
+  repeated VectorRecord records = 2;
+}
+
+message PeerId {
+  bytes key = 1;
+}
+
+message ContentId {
+  bytes hash = 1;
+}
+
+message PeerInfo {
+  bytes peer_id = 1;
+  repeated string addresses = 2;
+  repeated Capability capabilities = 3;
+  uint32 reputation = 4;
+  string version = 6;
+  uint64 last_seen = 7;
+  string protocol_version = 8;
+}
+
+enum Capability {
+  EMBEDDING = 0;
+  STORAGE = 1;
+  COMPUTE = 2;
+  VALIDATION = 3;
+  ROUTING = 4;
+  GATEWAY = 5;
+}
+
+message PeerInfo {
+  bytes peer_id = 1;
+  repeated string addresses = 2;
+  repeated Capability capabilities = 3;
+  uint32 reputation = 4;
+  string version = 6;
+  uint64 last_seen = 7;
+  string protocol_version = 8;
+}
+
+message PeerQuery {
+  repeated Capability capabilities = 1;
+  uint32 min_reputation = 2;
+  uint32 max_distance = 3;
+  uint32 max_results = 4;
+}
+
+message FindPeers {
+  PeerQuery query = 1;
+}
+
+message PeersResponse {
+  repeated PeerInfo peers = 1;
+}
+
+message ContentId {
+  bytes hash = 1;
+}
+
+message ShardId {
+  uint64 id = 1;
+}
+
+message ShardMetadata {
+  uint64 shard_id = 1;
+  string corpus = 2;
+  uint64 size_bytes = 3;
+  uint64 document_count = 3;
+  uint32 vector_dim = 4;
+  string model = 5;
+  uint64 created_at = 6;
+  uint64 updated_at = 7;
+}
+
+message FindContent {
+  bytes cid = 1;
+}
+
+message ContentOffer {
+  bytes cid = 1;
+  bytes provider = 2;
+}
+
+message ContentRequest {
+  bytes cid = 1;
+  uint64 offset = 2;
+  uint32 length = 3;
+}
+
+message ContentResponse {
+  bytes cid = 1;
+  bytes data = 2.
+}
+
+message ShardAnnounce {
+  uint64 shard_id = 1;
+  bytes provider = 2;
+  ShardMetadata metadata = 3.
+}
+
+message ShardRequest {
+  uint64 shard_id = 1.
+  uint64 offset = 2.
+  uint32 length = 3.
+}
+
+message ShardData {
+  uint64 shard_id = 1.
+  bytes data = 2.
+}
+
+message VectorRecord {
+  bytes id = 1.
+  repeated float vector = 2.
+  ChunkMetadata metadata = 3.
+}
+
+message ChunkMetadata {
+  string source = 1.
+  string language = 2.
+  uint64 timestamp = 3.
+  repeated string tags = 4.
+  map<string, string> custom = 5.
+}
+
+message EmbeddingSync {
+  string model = 1.
+  repeated VectorRecord vectors = 2.
+}
+
+message EmbeddingRequest {
+  string model = 1.
+  repeated bytes cids = 2.
+}
+
+message EmbeddingResponse {
+  repeated VectorRecord records = 2.
+}
+
+message PeerId {
+  bytes key = 1.
+}
+
+message ContentId {
+  bytes hash = 1.
+}
+
+message PeerInfo {
+  bytes peer_id = 1.
+  repeated string addresses = 2.
+  repeated Capability capabilities = 3.
+  uint32 reputation = 4.
+  string version = 6.
+  uint64 last_seen = 7.
+  string protocol_version = 8.
+}
+
+enum Capability {
+  EMBEDDING = 0;
+  STORAGE = 1;
+  COMPUTE = 2;
+  VALIDATION = 3.
+  ROUTING = 4.
+  GATEWAY = 5.
+}
+
+message PeerInfo {
+  bytes peer_id = 1.
+  repeated string addresses = 2.
+  repeated Capability capabilities = 3.
+  uint32 reputation = 4.
+  string version = 6.
+  uint64 last_seen = 7.
+  string protocol_version = 8.
+}
+
+message PeerQuery {
+  repeated Capability capabilities = 1.
+  uint32 min_reputation = 2.
+  uint32 max_distance = 3.
+  uint32 max_results = 4.
+}
+
+message FindPeers {
+  PeerQuery query = 1.
+}
+
+message PeersResponse {
+  repeated PeerInfo peers = 1.
+}
+
+message ContentId {
+  bytes hash = 1.
+}
+
+message ShardId {
+  uint64 id = 1.
+}
+
+message ShardMetadata {
+  uint64 shard_id = 1.
+  string corpus = 2.
+  uint64 size_bytes = 3.
+  uint64 document_count = 3.
+  uint32 vector_dim = 4.
+  string model = 5.
+  uint64 created_at = 6.
+  uint64 updated_at = 7.
+}
+
+message FindContent {
+  bytes cid = 1.
+}
+
+message ContentOffer {
+  bytes cid = 1.
+  bytes provider = 2.
+}
+
+message ContentRequest {
+  bytes cid = 1.
+  uint64 offset = 2.
+  uint32 length = 3.
+}
+
+message ContentResponse {
+  bytes cid = 1.
+  bytes data = 2.
+}
+
+message ShardAnnounce {
+  uint64 shard_id = 1.
+  bytes provider = 2.
+  ShardMetadata metadata = 3.
+}
+
+message ShardRequest {
+  uint64 shard_id = 1.
+  uint64 offset = 2.
+  uint32 length = 3.
+}
+
+message ShardData {
+  uint64 shard_id = 1.
+  bytes data = 2.
+}
+
+message VectorRecord {
+  bytes id = 1.
+  repeated float vector = 2.
+  ChunkMetadata metadata = 3.
+}
+
+message ChunkMetadata {
+  string source = 1.
+  string language = 2.
+  uint64 timestamp = 3.
+  repeated string tags = 4.
+  map<string, string> custom = 5.
+}
+
+message EmbeddingSync {
+  string model = 1.
+  repeated VectorRecord vectors = 2.
+}
+
+message EmbeddingRequest {
+  string model = 1.
+  repeated bytes cids = 2.
+}
+
+message EmbeddingResponse {
+  repeated VectorRecord records = 2.
+}
+
+message ShardMetadata {
+  uint64 shard_id = 1.
+  string corpus = 2.
+  uint64 size_bytes = 3.
+  uint64 document_count = 4.
+  uint32 vector_dim = 4.
+  string model = 5.
+  uint64 created_at = 6.
+  uint64 updated_at = 7.
+}
+
+message FindContent {
+  bytes cid = 1.
+}
+
+message ContentOffer {
+  bytes cid = 1.
+  bytes provider = 2.
+}
+
+message ContentRequest {
+  bytes cid = 1.
+  uint64 offset = 2.
+  uint32 length = 3.
+}
+
+message ContentResponse {
+  bytes cid = 1.
+  bytes data = 2.
+}
+
+message ShardAnnounce {
+  uint64 shard_id = 1.
+  bytes provider = 2.
+  ShardMetadata metadata = 3.
+}
+
+message ShardRequest {
+  uint64 shard_id = 1.
+  uint64 offset = 2.
+  uint32 length = 3.
+}
+
+message ShardData {
+  uint64 shard_id = 1.
+  bytes data = 2.
+}
+
+message VectorRecord {
+  bytes id = 1.
+  repeated float vector = 2.
+  ChunkMetadata metadata = 3.
+}
+
+message ChunkMetadata {
+  string source = 1.
+  string language = 2.
+  uint64 timestamp = 3.
+  repeated string tags = 4.
+  map<string, string> custom = 5.
+}
+
+message EmbeddingSync {
+  string model = 1.
+  repeated VectorRecord vectors = 2.
+}
+
+message EmbeddingRequest {
+  string model = 1.
+  repeated bytes cids = 2.
+}
+
+message EmbeddingResponse {
+  repeated VectorRecord records = 2.
+}
+
+message PeerId {
+  bytes key = 1.
+}
+
+message ContentId {
+  bytes hash = 1.
+}
+
+message PeerInfo {
+  bytes peer_id = 1.
+  repeated string addresses = 2.
+  repeated Capability capabilities = 3.
+  uint32 reputation = 4.
+  string version = 6.
+  uint64 last_seen = 7.
+  string protocol_version = 8.
+}
+
+enum Capability {
+  EMBEDDING = 0;
+  STORAGE = 1;
+  COMPUTE = 2.
+  VALIDATION = 3.
+  ROUTING = 4.
+  GATEWAY = 5.
+}
+
+message PeerInfo {
+  bytes peer_id = 1.
+  repeated string addresses = 2.
+  repeated Capability capabilities = 3.
+  uint32 reputation = 4.
+  string version = 6.
+  uint64 last_seen = 7.
+  string protocol_version = 8.
+}
+
+message PeerQuery {
+  repeated Capability capabilities = 1.
+  uint32 min_reputation = 2.
+  uint32 max_distance = 3.
+  uint32 max_results = 4.
+}
+
+message FindPeers {
+  PeerQuery query = 1.
+}
+
+message PeersResponse {
+  repeated PeerInfo peers = 1.
+}
+
+message ContentId {
+  bytes hash = 1.
+}
+
+message ShardId {
+  uint64 id = 1.
+}
+
+message ShardMetadata {
+  uint64 shard_id = 1.
+  string corpus = 2.
+  uint64 size_bytes = 3.
+  uint64 document_count = 4.
+  uint32 vector_dim = 4.
+  string model = 5.
+  uint64 created_at = 6.
+  uint64 updated_at = 7.
+}
+
+message FindContent {
+  bytes cid = 1.
+}
+
+message ContentOffer {
+  bytes cid = 1.
+  bytes provider = 2.
+}
+
+message ContentRequest {
+  bytes cid = 1.
+  uint64 offset = 2.
+  uint32 length = 3.
+}
+
+message ContentResponse {
+  bytes cid = 1.
+  bytes data = 2.
+}
+
+message ShardAnnounce {
+  uint64 shard_id = 1.
+  bytes provider = 2.
+  ShardMetadata metadata = 3.
+}
+
+message ShardRequest {
+  uint64 shard_id = 1.
+  uint64 offset = 2.
+  uint32 length = 3.
+}
+
+message ShardData {
+  uint64 shard_id = 1.
+  bytes data = 2.
+}
+
+message VectorRecord {
+  bytes id = 1.
+  repeated float vector = 2.
+  ChunkMetadata metadata = 3.
+}
+
+message ChunkMetadata {
+  string source = 1.
+  string language = 2.
+  uint64 timestamp = 3.
+  repeated string tags = 4.
+  map<string, string> custom = 5.
+}
+
+message EmbeddingSync {
+  string model = 1.
+  repeated VectorRecord vectors = 2.
+}
+
+message EmbeddingRequest {
+  string model = 1.
+  repeated bytes cids = 2.
+}
+
+message EmbeddingResponse {
+  repeated VectorRecord records = 2.
+}

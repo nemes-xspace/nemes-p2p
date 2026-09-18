@@ -1,0 +1,5 @@
+# Derleme artigi + harici gecmis + agir ikililer (ayri yedeklenir)
+/target/
+/llama.cpp-build/
+nemes-core/binaries/
+*.log

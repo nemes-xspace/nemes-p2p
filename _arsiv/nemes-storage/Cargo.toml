@@ -1,0 +1,15 @@
+[package]
+name = "nemes-storage"
+version = "0.1.0"
+edition = "2021"
+description = "NEMES Storage - RocksDB + BadgerDB + CID + DHT indexing"
+license = "Apache-2.0"
+
+[dependencies]
+nemes-core = { path = "../nemes-core" }
+rocksdb = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }

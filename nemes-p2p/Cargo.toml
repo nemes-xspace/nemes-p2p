@@ -1,0 +1,20 @@
+[package]
+name = "nemes-p2p"
+version = "0.1.0"
+edition = "2021"
+description = "NEMES P2P Networking - libp2p based"
+license = "Apache-2.0"
+
+[dependencies]
+nemes-core = { path = "../nemes-core" }
+libp2p = { workspace = true }
+tokio = { workspace = true }
+tokio-util = { version = "0.7", features = ["codec"] }
+futures = "0.3"
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+bytes = "1.5"

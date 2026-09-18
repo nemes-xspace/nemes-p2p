@@ -1,0 +1,15 @@
+[package]
+name = "nemes-embedding"
+version = "0.1.0"
+edition = "2021"
+description = "NEMES Embedding - Local llama.cpp wrapper"
+license = "Apache-2.0"
+
+[dependencies]
+nemes-core = { path = "../nemes-core" }
+# llama-cpp-2 = { version = "0.3", features = ["metal", "cuda", "vulkan"] }  # Optional feature
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }

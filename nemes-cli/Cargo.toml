@@ -1,0 +1,26 @@
+[package]
+name = "nemes-cli"
+
+[[bin]]
+name = "nemes-miner"
+path = "src/main.rs"
+version = "0.1.0"
+edition = "2021"
+description = "NEMES CLI - Command line interface"
+license = "Apache-2.0"
+
+[dependencies]
+nemes-core = { path = "../nemes-core" }
+nemes-p2p = { path = "../nemes-p2p" }
+libp2p = { workspace = true }
+tokio = { workspace = true }
+clap = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+base64 = "0.22"
+hex = "0.4"
+rand = "0.8"
+ed25519-dalek = { workspace = true }
+tracing-subscriber = { workspace = true }

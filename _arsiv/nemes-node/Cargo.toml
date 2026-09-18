@@ -1,0 +1,19 @@
+[package]
+name = "nemes-node"
+version = "0.1.0"
+edition = "2021"
+description = "NEMES Node - Background daemon"
+license = "Apache-2.0"
+
+[dependencies]
+nemes-core = { path = "../nemes-core" }
+nemes-p2p = { path = "../nemes-p2p" }
+nemes-storage = { path = "../nemes-storage" }
+nemes-embedding = { path = "../nemes-embedding" }
+nemes-consensus = { path = "../nemes-consensus" }
+nemes-wallet = { path = "../nemes-wallet" }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }

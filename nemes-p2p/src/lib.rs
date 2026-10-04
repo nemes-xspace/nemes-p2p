@@ -119,8 +119,8 @@ impl P2PNode {
         ));
         // Kademlia DHT iskeleti: bugun yalnizca tohum-adresli calisir (add_address+bootstrap);
         // provide/get_providers/dial yok — tohum-disi WAN kesfi fiilen mDNS+elle dial'dir.
-        let mut kad_cfg = kad::Config::default();
-        kad_cfg.set_protocol_names(vec![libp2p::StreamProtocol::new("/nemes/kad/1.0.0")]);
+        // libp2p 0.57: protokol adi Config::new ile verilir (set_protocol_names kaldirildi).
+        let kad_cfg = kad::Config::new(libp2p::StreamProtocol::new("/nemes/kad/1.0.0"));
         let kademlia = kad::Behaviour::with_config(
             peer_id,
             kad::store::MemoryStore::new(peer_id),
